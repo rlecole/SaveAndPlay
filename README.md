@@ -1,4 +1,4 @@
-SaveAndPlay
+Save & Play
 ===========
 
 Save & Play is an application enabling you to save video and audio files into your Windows Phone.
