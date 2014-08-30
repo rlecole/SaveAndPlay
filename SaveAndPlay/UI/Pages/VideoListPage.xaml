@@ -1,0 +1,143 @@
+﻿<!-- Apache License, Version 2.0 
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+-->
+
+<localPages:BasePage x:Class="SaveAndPlay.UI.Pages.VideoListPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP71"
+    xmlns:slt="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:c4f="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+    xmlns:localConverters="clr-namespace:SaveAndPlay.Converters"
+    xmlns:localControls="clr-namespace:SaveAndPlay.UI.Controls"
+    xmlns:localBehaviors="clr-namespace:SaveAndPlay.UI.Behaviors"
+    xmlns:localPages="clr-namespace:SaveAndPlay.UI.Pages"
+    xmlns:Bewise="clr-namespace:Bewise.Phone;assembly=Bewise.Phone"
+    mc:Ignorable="d"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="728" d:DesignWidth="480"
+    DataContext="{Binding Source={StaticResource Locator}, Path=VideoList}" shell:SystemTray.IsVisible="True">
+
+    <slt:TransitionService.NavigationInTransition>
+        <slt:NavigationInTransition>
+            <slt:NavigationInTransition.Backward>
+                <slt:SlideTransition Mode="SlideDownFadeIn"/>
+            </slt:NavigationInTransition.Backward>
+            <slt:NavigationInTransition.Forward>
+                <slt:TurnstileTransition Mode="ForwardIn"/>
+            </slt:NavigationInTransition.Forward>
+        </slt:NavigationInTransition>
+    </slt:TransitionService.NavigationInTransition>
+    <slt:TransitionService.NavigationOutTransition>
+        <slt:NavigationOutTransition>
+            <slt:NavigationOutTransition.Backward>
+                <slt:TurnstileTransition Mode="BackwardOut"/>
+            </slt:NavigationOutTransition.Backward>
+            <slt:NavigationOutTransition.Forward>
+                <slt:SlideTransition Mode="SlideUpFadeOut"/>
+            </slt:NavigationOutTransition.Forward>
+        </slt:NavigationOutTransition>
+    </slt:TransitionService.NavigationOutTransition>
+
+    <localPages:BasePage.Resources>
+        <localConverters:ValueConverterGroup x:Key="InvertAndVisibilitateConverter">
+            <localConverters:InverseBooleanConverter/>
+            <localConverters:BooleanToVisibilityConverter/>
+        </localConverters:ValueConverterGroup>
+        <localConverters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </localPages:BasePage.Resources>
+
+    <localPages:BasePage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Minimized">
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="AppBar_SettingsMenu" Click="ApplicationBarMenuItem_Settings_Click"></shell:ApplicationBarMenuItem>
+                <shell:ApplicationBarMenuItem Text="AppBar_AboutMenu" Click="ApplicationBarMenuItem_About_Click"></shell:ApplicationBarMenuItem>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </localPages:BasePage.ApplicationBar>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle"
+                       Text="{Binding Source={StaticResource Localisation}, Path=Main.ApplicationTitle, Mode=OneTime}"
+                       Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle"
+                       Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="44"
+                       Text="{Binding Source={StaticResource Localisation}, Path=VideoList.Title, Mode=OneTime}"/>
+        </StackPanel>
+
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" TextAlignment="Center"
+			            Margin="12,50,12,0"
+                        Style="{StaticResource PhoneTextSubtleStyle}"
+                        Visibility="{Binding Path=NoVideo, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        TextWrapping="Wrap" FontSize="36"
+                        Text="{Binding Source={StaticResource Localisation}, Path=VideoList.NoVideo, Mode=OneTime}"/>
+            <Bewise:JumpList x:Name="VideosJumpList"
+                             ItemsSource="{Binding Videos}"
+                             ShowHeaders="True" IsPumped="False" BlockListOnLoad="False" ShowRowHeader="False"
+                             SelectedItemChanged="VideosJumpList_SelectedItemChanged"
+                             Visibility="{Binding Path=NoVideo, Converter={StaticResource InvertAndVisibilitateConverter}}">
+                <Bewise:JumpList.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0" Height="65" Width="450">
+                            <StackPanel Orientation="Horizontal">
+                                <c4f:RoundButton Margin="0,4,0,-4" ImageSource="/Images/play.png" Click="VideoButton_Click"/>
+                                <TextBlock Margin="0" Width="340" FontSize="{StaticResource PhoneFontSizeLarge}"
+                                           Text="{Binding Path=Title}" TextWrapping="NoWrap" TextTrimming="WordEllipsis"/>
+                                <Image Source="/Images/light/lock.png"
+                                       localBehaviors:HandleThemeBehavior.DarkUrl="/Images/light/lock.png"
+                                       localBehaviors:HandleThemeBehavior.LightUrl="/Images/dark/lock.png"
+                                       HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0"
+                                       Visibility="{Binding Path=IsProtected, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                       Width="48" Height="48"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </Bewise:JumpList.ItemTemplate>
+            </Bewise:JumpList>
+            <c4f:ProgressOverlay Name="progressOverlay" Grid.RowSpan="2" Visibility="Collapsed">
+                <c4f:ProgressOverlay.Content>
+                    <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                Orientation="Vertical">
+                        <TextBlock x:Name="progressBarLabel"
+                                   HorizontalAlignment="Center" Margin="0,0,0,1"
+                                   Style="{StaticResource PhoneTextAccentStyle}"
+                                   Text="{Binding Source={StaticResource Localisation}, Path=Main.Loading, Mode=OneTime}" />
+                        <slt:PerformanceProgressBar x:Name="progressBar"
+                                                    HorizontalAlignment="Stretch"
+                                                    IsIndeterminate="True"/>
+                    </StackPanel>
+                </c4f:ProgressOverlay.Content>
+            </c4f:ProgressOverlay>
+        </Grid>
+    </Grid>
+</localPages:BasePage>

@@ -1,0 +1,133 @@
+﻿<!-- Apache License, Version 2.0 
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+-->
+
+<localPages:BasePage 
+    x:Class="SaveAndPlay.UI.Pages.AboutPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:slt="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP71"
+    xmlns:localPages="clr-namespace:SaveAndPlay.UI.Pages"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True"
+    Style="{StaticResource TransitionPageTurnstileStyle}">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle"
+                       Text="{Binding Source={StaticResource Localisation}, Path=Main.ApplicationTitle, Mode=OneTime}"
+                       Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle"
+                       Text="{Binding Source={StaticResource Localisation}, Path=About.Title, Mode=OneTime}"
+                       Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="44"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
+            <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="270"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="60"></RowDefinition>
+                    <RowDefinition Height="90"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="80"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="80"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="80"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Image Grid.Row="0"
+                       Width="256" Height="256" Margin="0"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Source="/Images/applicationIconBig.png"/>
+                <TextBlock Grid.Row="1"
+                           HorizontalAlignment="Center" VerticalAlignment="Top"
+                           TextWrapping="Wrap" FontSize="36"
+                           Text="{Binding Source={StaticResource Localisation}, Path=Main.ApplicationTitle, Mode=OneTime}"/>
+                <TextBlock Grid.Row="2"
+                           HorizontalAlignment="Center" VerticalAlignment="Top"
+                           TextWrapping="Wrap" FontSize="24"
+                           Text="{Binding Source={StaticResource Localisation}, Path=About.LeitmotivLabel, Mode=OneTime}"/>
+                <TextBlock Grid.Row="3"
+                           HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,0"
+                           TextWrapping="Wrap"
+                           Text="{Binding Source={StaticResource Localisation}, Path=About.DescriptionLabel, Mode=OneTime}"/>
+                <TextBlock Grid.Row="4"
+                           HorizontalAlignment="Left" Margin="12,0"
+                           TextWrapping="Wrap" FontSize="18" FontWeight="Bold"
+                           Text="{Binding Path=VersionLabel}"/>
+                <TextBlock Grid.Row="5"
+                           HorizontalAlignment="Left"  Margin="12,0"
+                           TextWrapping="Wrap" FontSize="18" FontWeight="Bold"
+                           Text="{Binding Source={StaticResource Localisation}, Path=About.AuthorLabel, Mode=OneTime}"/>
+                <TextBlock Grid.Row="6"
+                           Foreground="{StaticResource PhoneSubtleBrush}"
+                           FontSize="{StaticResource PhoneFontSizeNormal}"
+                           VerticalAlignment="Center" HorizontalAlignment="Left"
+                           Margin="12,12,12,-8"
+                           TextWrapping="Wrap" 
+                           Text="{Binding Source={StaticResource Localisation}, Path=About.VoteLabel, Mode=OneTime}"/>
+                <Button Grid.Row="7" Margin="0"
+                        Content="{Binding Source={StaticResource Localisation}, Path=About.VoteButton, Mode=OneTime}"
+                        Click="VoteButton_Click"/>
+                <TextBlock Grid.Row="8"
+                           Foreground="{StaticResource PhoneSubtleBrush}"
+                           FontSize="{StaticResource PhoneFontSizeNormal}"
+                           VerticalAlignment="Center" HorizontalAlignment="Left"
+                           Margin="12,12,12,-8"
+                           TextWrapping="Wrap" 
+                           Text="{Binding Source={StaticResource Localisation}, Path=About.ReportLabel, Mode=OneTime}"/>
+                <Button Grid.Row="9" Margin="0"
+                        Content="{Binding Source={StaticResource Localisation}, Path=About.ReportButton, Mode=OneTime}"
+                        Click="ReportButton_Click"/>
+                <TextBlock Grid.Row="10"
+                           Foreground="{StaticResource PhoneSubtleBrush}"
+                           FontSize="{StaticResource PhoneFontSizeNormal}"
+                           VerticalAlignment="Center" HorizontalAlignment="Left"
+                           Margin="12,12,12,-8"
+                           TextWrapping="Wrap" 
+                           Text="{Binding Source={StaticResource Localisation}, Path=About.ReviewLabel, Mode=OneTime}"/>
+                <Button Grid.Row="11" Margin="0"
+                        Content="{Binding Source={StaticResource Localisation}, Path=About.ReviewButton, Mode=OneTime}"
+                        Click="ReviewButton_Click"/>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+
+</localPages:BasePage>

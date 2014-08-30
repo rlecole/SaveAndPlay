@@ -1,0 +1,766 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4DBF5356-5BD1-4C3E-B7AC-FBBDB210AC34}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SaveAndPlay</RootNamespace>
+    <AssemblyName>SaveAndPlay</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <TargetFrameworkProfile>WindowsPhone71</TargetFrameworkProfile>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>
+      <SupportedCultures>en-US;fr-FR;</SupportedCultures>
+    </SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>SaveAndPlay.xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>SaveAndPlay.App</SilverlightAppEntry>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <ExpressionBlendVersion>5.0.30924.0</ExpressionBlendVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Bewise.Phone">
+      <HintPath>..\packages\BewisePhoneControls.2.1\lib\Bewise.Phone.dll</HintPath>
+    </Reference>
+    <Reference Include="Coding4Fun.Toolkit.Controls">
+      <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.0.6\lib\wp71\Coding4Fun.Toolkit.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="DropNet.WindowsPhone">
+      <HintPath>..\packages\DropNet.1.9.3\lib\sl4-wp71\DropNet.WindowsPhone.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras.WP71">
+      <HintPath>..\packages\MvvmLight.4.1.23.0\lib\sl4-windowsphone71\GalaSoft.MvvmLight.Extras.WP71.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.WP71">
+      <HintPath>..\packages\MvvmLight.4.1.23.0\lib\sl4-windowsphone71\GalaSoft.MvvmLight.WP71.dll</HintPath>
+    </Reference>
+    <Reference Include="Id3">
+      <HintPath>..\packages\ID3.0.3.0\lib\sl4-wp71\Id3.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Controls.Fxg, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Expression.Interactions, Version=3.8.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Live">
+      <HintPath>..\packages\LiveSDK.5.3\lib\WindowsPhone71\Microsoft.Live.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Live.Controls">
+      <HintPath>..\packages\LiveSDK.5.3\lib\WindowsPhone71\Microsoft.Live.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Phone" />
+    <Reference Include="Microsoft.Phone.Controls" />
+    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL">
+      <HintPath>..\packages\SilverlightToolkitWP.4.2012.10.9\lib\sl4-windowsphone71\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Phone.Interop" />
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\MvvmLight.4.1.23.0\lib\sl4-windowsphone71\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework" />
+    <Reference Include="RestSharp.WindowsPhone">
+      <HintPath>..\packages\DropNet.1.9.3\lib\sl4-wp71\RestSharp.WindowsPhone.dll</HintPath>
+    </Reference>
+    <Reference Include="Silverlight_ZXing_Core">
+      <HintPath>..\packages\ZXing.WP7.1.3\lib\sl3-wp\Silverlight_ZXing_Core.dll</HintPath>
+    </Reference>
+    <Reference Include="system.data.linq" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Observable" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Interactivity, Version=3.8.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="mscorlib.extensions" />
+    <Reference Include="WP7_Barcode_Library">
+      <HintPath>..\packages\ZXing.WP7.1.3\lib\sl3-wp\WP7_Barcode_Library.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Converters\FileSizeConverter.cs" />
+    <Compile Include="Converters\MediaSourceLocalisationConverter.cs" />
+    <Compile Include="Converters\FileTransferFormatConverter.cs" />
+    <Compile Include="Converters\StringOrEmptyVisibilityConverter.cs" />
+    <Compile Include="Converters\TransferRateConverter.cs" />
+    <Compile Include="Converters\TransferRequirementLocalizationConverter.cs" />
+    <Compile Include="Converters\UndefinedConverter.cs" />
+    <Compile Include="Helpers\IsolatedStorageFileHelper.cs" />
+    <Compile Include="Helpers\LinqToVisualTree.cs" />
+    <Compile Include="Helpers\UIHelper.cs" />
+    <Compile Include="Resources\About.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>About.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\About.fr-FR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>About.fr-FR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ApplicationBarMenus.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApplicationBarMenus.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ApplicationBarMenus.fr-FR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApplicationBarMenus.fr-FR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\DownloadList.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DownloadList.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\DownloadList.fr-FR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DownloadList.fr-FR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Login.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Login.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Login.fr-FR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Login.fr-FR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Main.fr-FR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Main.fr-FR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Main1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Main.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\MusicList.fr-FR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MusicList.fr-FR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\MediaSource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MediaSource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\MediaSource.fr-FR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MediaSource.fr-FR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\MusicList.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MusicList.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\NewDownload.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NewDownload.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\NewDownload.fr-FR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NewDownload.fr-FR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ProtectedMode.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProtectedMode.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ProtectedMode.fr-FR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProtectedMode.fr-FR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\VideoList.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VideoList.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewService\DataLoadingScopeViewService.cs" />
+    <Compile Include="Service\ForegroundTransferService.cs" />
+    <Compile Include="Service\IApplicationSettingsService.cs" />
+    <Compile Include="Resources\Localisation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Service\IMediaSupportService.cs" />
+    <Compile Include="Service\IPlaybackAgentService.cs" />
+    <Compile Include="Service\PlaybackAgentService.cs" />
+    <Compile Include="UI\Behaviors\HandleThemeBehavior.cs" />
+    <Compile Include="UI\Behaviors\MetroInMotion.cs" />
+    <Compile Include="UI\Behaviors\ScreenShotBehavior.cs" />
+    <Compile Include="UI\Behaviors\TextBoxFocusBehavior.cs" />
+    <Compile Include="UI\Controls\DataTemplateSelector.cs" />
+    <Compile Include="UI\Controls\FileBrowserControl.xaml.cs">
+      <DependentUpon>FileBrowserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\FileBrowserControlEntities\AudioFile.cs" />
+    <Compile Include="UI\Controls\FileBrowserControlEntities\FileTypeComparer.cs" />
+    <Compile Include="UI\Controls\FileBrowserControlEntities\VideoFile.cs" />
+    <Compile Include="UI\Controls\FileBrowserControlEntities\FileDataTemplateSelector.cs" />
+    <Compile Include="UI\Controls\FileBrowserControlEntities\Folder.cs" />
+    <Compile Include="UI\Controls\FileBrowserControlEntities\BaseFile.cs" />
+    <Compile Include="UI\Controls\Worksheet.xaml.cs">
+      <DependentUpon>Worksheet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\AboutPage.xaml.cs">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\AddDownloadPage.xaml.cs">
+      <DependentUpon>AddDownloadPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\InverseBooleanConverter.cs" />
+    <Compile Include="Converters\ValueConverterGroup.cs" />
+    <Compile Include="UI\Controls\DownloadListControl.xaml.cs">
+      <DependentUpon>DownloadListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\AlbumPage.xaml.cs">
+      <DependentUpon>AlbumPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\ArtistPage.xaml.cs">
+      <DependentUpon>ArtistPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\AudioMediaPage.xaml.cs">
+      <DependentUpon>AudioMediaPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\AudioPlayerPage.xaml.cs">
+      <DependentUpon>AudioPlayerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\BasePage.cs" />
+    <Compile Include="UI\Pages\FavoritesPage.xaml.cs">
+      <DependentUpon>FavoritesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Service\ApplicationSettingsService.cs" />
+    <Compile Include="Service\MediaSupportService.cs" />
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\MediasControl.xaml.cs">
+      <DependentUpon>MediasControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\MediaSourcePage.xaml.cs">
+      <DependentUpon>MediaSourcePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\MusicListPage.xaml.cs">
+      <DependentUpon>MusicListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\BarcodeService.cs" />
+    <Compile Include="Service\IBarcodeService.cs" />
+    <Compile Include="UI\Pages\PlaylistPage.xaml.cs">
+      <DependentUpon>PlaylistPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\ProtectedModeNewPasswordPage.xaml.cs">
+      <DependentUpon>ProtectedModeNewPasswordPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\ProtectedModePage.xaml.cs">
+      <DependentUpon>ProtectedModePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\URLSelectorDropboxPage.xaml.cs">
+      <DependentUpon>URLSelectorDropboxPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\URLSelectorManualPage.xaml.cs">
+      <DependentUpon>URLSelectorManualPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\URLSelectorQRCodePage.xaml.cs">
+      <DependentUpon>URLSelectorQRCodePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\URLSelectorSkydrivePage.xaml.cs">
+      <DependentUpon>URLSelectorSkydrivePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\VideoListPage.xaml.cs">
+      <DependentUpon>VideoListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\VideoMediaPage.xaml.cs">
+      <DependentUpon>VideoMediaPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\VideoPlayerPage.xaml.cs">
+      <DependentUpon>VideoPlayerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AlbumViewModel.cs" />
+    <Compile Include="ViewModels\ArtistViewModel.cs" />
+    <Compile Include="ViewModels\AudioMediaViewModel.cs" />
+    <Compile Include="ViewModels\BaseFileBrowserViewModel.cs" />
+    <Compile Include="ViewModels\DownloadItemBackgroundViewModel.cs" />
+    <Compile Include="ViewModels\DownloadItemForegroundViewModel.cs" />
+    <Compile Include="ViewModels\BaseDownloadItemViewModel.cs" />
+    <Compile Include="ViewModels\DownloadListViewModel.cs" />
+    <Compile Include="ViewModels\DropboxViewModel.cs" />
+    <Compile Include="ViewModels\FavoritesViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\Messages\CancelTransfer.cs" />
+    <Compile Include="ViewModels\Messages\DownloadLock.cs" />
+    <Compile Include="ViewModels\Messages\ESessionState.cs" />
+    <Compile Include="ViewModels\Messages\SessionState.cs" />
+    <Compile Include="ViewModels\Messages\ScreenLock.cs" />
+    <Compile Include="ViewModels\Messages\Update.cs" />
+    <Compile Include="ViewModels\MusicListViewModel.cs" />
+    <Compile Include="ViewModels\NewDownloadViewModel.cs" />
+    <Compile Include="ViewModels\PlaylistViewModel.cs" />
+    <Compile Include="ViewModels\ProtectedModeNewPasswordViewModel.cs" />
+    <Compile Include="ViewModels\ProtectedModeViewModel.cs" />
+    <Compile Include="ViewModels\SkydriveViewModel.cs" />
+    <Compile Include="ViewModels\VideoListViewModel.cs" />
+    <Compile Include="ViewModels\VideoMediaViewModel.cs" />
+    <Compile Include="ViewModels\VideoPlayerViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="ViewService\DialogViewService.cs" />
+    <Compile Include="ViewService\INavigationViewService.cs" />
+    <Compile Include="ViewService\NavigationViewService.cs" />
+    <Compile Include="UI\Pages\URLSelectorWebBrowserPage.xaml.cs">
+      <DependentUpon>URLSelectorWebBrowserPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+    <Page Include="UI\Controls\FileBrowserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Controls\Worksheet.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Pages\AboutPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\AddDownloadPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Controls\DownloadListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\AlbumPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Pages\ArtistPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Pages\AudioMediaPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Pages\AudioPlayerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Pages\FavoritesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Controls\MediasControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\MediaSourcePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\MusicListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\PlaylistPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Pages\ProtectedModeNewPasswordPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Pages\ProtectedModePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\URLSelectorDropboxPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\URLSelectorManualPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\URLSelectorQRCodePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\URLSelectorSkydrivePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\VideoListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\URLSelectorWebBrowserPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\VideoMediaPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Pages\VideoPlayerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Fonts\LiveSymbol.ttf" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\AppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\WMAppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="application.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\clean.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\dark\active.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\dark\add.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\dark\camera.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\dark\dropbox.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\dark\ie.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\dark\keyboard.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\dark\lock.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\dark\power.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\dark\select-listbox.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\dark\signal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\dark\skydrive.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\dark\wifi.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\light\active.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\applicationIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="SubmitInformation\FR\download.png" />
+    <None Include="SubmitInformation\FR\home.png" />
+    <None Include="SubmitInformation\FR\mediasources.png" />
+    <None Include="SubmitInformation\FR\newdownload.png" />
+    <None Include="SubmitInformation\FR\protected.png" />
+    <None Include="SubmitInformation\FR\settings.png" />
+    <None Include="SubmitInformation\FR\skydrive.png" />
+    <None Include="SubmitInformation\FR\webbrowser.png" />
+    <None Include="Images\applicationIcon200x200.png" />
+    <None Include="Images\applicationIcon99x99.png" />
+    <None Include="Images\applicationIcon300x300.png" />
+    <Content Include="Images\applicationIconBig.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\clear.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\id3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\light\add.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\light\camera.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\light\dropbox.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\light\keyboard.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\light\power.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\light\select-listbox.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\light\signal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\light\skydrive.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\light\wifi.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\login.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\logout.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\musicfile.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\next-player.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\next.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\pause-player.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\picture.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\previous-player.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\previous.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\tileIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\add.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\camera.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\download.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\light\lock.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\music.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\play.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\refresh.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\save.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\video.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\delete.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\light\ie.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\videofile.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Toolkit.Content\ApplicationBar.Cancel.png" />
+    <Resource Include="Toolkit.Content\ApplicationBar.Check.png" />
+    <Resource Include="Toolkit.Content\ApplicationBar.Delete.png" />
+    <Resource Include="Toolkit.Content\ApplicationBar.Select.png" />
+    <None Include="SubmitInformation\EN\download.png" />
+    <None Include="SubmitInformation\EN\newdownload.png" />
+    <None Include="SubmitInformation\EN\protected.png" />
+    <None Include="SubmitInformation\EN\skydrive.png" />
+    <None Include="SubmitInformation\EN\webbrowser.png" />
+    <None Include="SubmitInformation\FR\description.fr-FR.txt" />
+    <None Include="SubmitInformation\EN\description.txt" />
+    <None Include="SubmitInformation\EN\home.png" />
+    <None Include="SubmitInformation\EN\mediasources.png" />
+    <None Include="SubmitInformation\EN\settings.png" />
+    <Content Include="SplashScreenImage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\About.fr-FR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>About.fr-FR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\About.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>About.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ApplicationBarMenus.fr-FR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ApplicationBarMenus.fr-FR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ApplicationBarMenus.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ApplicationBarMenus.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\DownloadList.fr-FR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DownloadList.fr-FR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\DownloadList.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DownloadList.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Login.fr-FR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Login.fr-FR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Login.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Login.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Main.fr-FR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Main.fr-FR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Main.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Main1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\MusicList.fr-FR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MusicList.fr-FR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\MediaSource.fr-FR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MediaSource.fr-FR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\MediaSource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MediaSource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\MusicList.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MusicList.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\NewDownload.fr-FR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NewDownload.fr-FR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\NewDownload.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NewDownload.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ProtectedMode.fr-FR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProtectedMode.fr-FR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ProtectedMode.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProtectedMode.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\VideoList.fr-FR.resx" />
+    <EmbeddedResource Include="Resources\VideoList.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>VideoList.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SaveAndPlay.AudioPlaybackAgent\SaveAndPlay.AudioPlaybackAgent.csproj">
+      <Project>{48F5DF09-341A-4291-B70B-EE079AC515EA}</Project>
+      <Name>SaveAndPlay.AudioPlaybackAgent</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SaveAndPlay.DAL\SaveAndPlay.DAL.csproj">
+      <Project>{6EC75397-6D8C-4799-9B78-C605A3982124}</Project>
+      <Name>SaveAndPlay.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SaveAndPlay.Scheduler\SaveAndPlay.Scheduler.csproj">
+      <Project>{B656AC49-E9F9-4857-97AB-5F847D855CAD}</Project>
+      <Name>SaveAndPlay.Scheduler</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+</Project>

@@ -1,0 +1,213 @@
+﻿<!-- Apache License, Version 2.0 
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+-->
+
+<UserControl x:Class="SaveAndPlay.UI.Controls.FileBrowserControl"
+    x:Name="FileBrowserControlName"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:localControls="clr-namespace:SaveAndPlay.UI.Controls"
+    xmlns:localControlEntities="clr-namespace:SaveAndPlay.UI.Controls.FileBrowserControlEntities"
+    xmlns:localConverters="clr-namespace:SaveAndPlay.Converters"
+    xmlns:localBehaviors="clr-namespace:SaveAndPlay.UI.Behaviors"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP71"
+    xmlns:slt="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:c4f="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+
+	<UserControl.Resources>
+		<localConverters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+		<ControlTemplate x:Key="FolderButtonControlTemplate" TargetType="Button">
+			<Grid Margin="3" Height="64">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="64" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="64" />
+				</Grid.RowDefinitions>
+				<Grid Grid.Column="0"
+					  Width="64" Height="64"
+					  Background="{StaticResource PhoneAccentBrush}">
+					<TextBlock Margin="4" MaxWidth="54"
+							   VerticalAlignment="Bottom" HorizontalAlignment="Right"
+							   FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="{StaticResource PhoneForegroundBrush}"
+							   Text="{Binding FilesCount}" TextTrimming="WordEllipsis" TextWrapping="NoWrap"/>
+				</Grid>
+				<TextBlock Grid.Column="1" Margin="12,-6,0,0"
+						   VerticalAlignment="Center"
+						   Text="{Binding Title}"
+						   TextTrimming="WordEllipsis" TextWrapping="NoWrap" HorizontalAlignment="Left"
+						   FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
+			</Grid>
+		</ControlTemplate>
+
+		<ControlTemplate x:Key="VideoButtonControlTemplate" TargetType="Button">
+			<Grid Margin="3" Height="64">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="64" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="64" />
+				</Grid.RowDefinitions>
+				<Grid Grid.Column="0"
+					  Width="64" Height="64"
+					  Background="{StaticResource PhoneAccentBrush}">
+                    <c4f:RoundButton ImageSource="/Images/video.png" Margin="-3,8,0,0"
+                                     Foreground="White" BorderBrush="White" IsHitTestVisible="False"/>
+				</Grid>
+				<Grid Grid.Column="1">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="40" />
+						<RowDefinition Height="24" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<TextBlock Grid.Row="0"
+							   HorizontalAlignment="Left" VerticalAlignment="Top"
+							   Text="{Binding Title}"
+							   TextTrimming="WordEllipsis" TextWrapping="NoWrap" FontSize="{StaticResource PhoneFontSizeMediumLarge}" Margin="12,0,0,0"/>
+					<TextBlock Grid.Row="1"
+							   HorizontalAlignment="Left" VerticalAlignment="Center"
+							   Text="{Binding Size}" TextTrimming="WordEllipsis" TextWrapping="NoWrap"
+							   Style="{StaticResource PhoneTextSubtleStyle}" FontSize="{StaticResource PhoneFontSizeSmall}" Margin="12,-6"/>
+				</Grid>
+			</Grid>
+		</ControlTemplate>
+
+		<ControlTemplate x:Key="AudioButtonControlTemplate" TargetType="Button">
+			<Grid Margin="3" Height="64">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="64" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="64" />
+				</Grid.RowDefinitions>
+				<Grid Grid.Column="0"
+					  Width="64" Height="64"
+					  Background="{StaticResource PhoneAccentBrush}">
+                    <c4f:RoundButton ImageSource="/Images/music.png" Margin="-3,8,0,0"
+                                     Foreground="White" BorderBrush="White" IsHitTestVisible="False"/>
+				</Grid>
+				<Grid Grid.Column="1">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="40" />
+						<RowDefinition Height="24" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<TextBlock Grid.Row="0"
+							   HorizontalAlignment="Left" VerticalAlignment="Top"
+							   Text="{Binding Title}"
+							   TextTrimming="WordEllipsis" TextWrapping="NoWrap" FontSize="{StaticResource PhoneFontSizeMediumLarge}" Margin="12,0,0,0"/>
+					<TextBlock Grid.Row="1"
+							   HorizontalAlignment="Left" VerticalAlignment="Center" 
+							   Text="{Binding Size}" TextTrimming="WordEllipsis" TextWrapping="NoWrap"
+							   Style="{StaticResource PhoneTextSubtleStyle}" FontSize="{StaticResource PhoneFontSizeSmall}" Margin="12,-6"/>
+				</Grid>
+			</Grid>
+		</ControlTemplate>
+	</UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+		<StackPanel Grid.Row="0" Margin="4,0,0,24" Orientation="Horizontal">
+			<Rectangle Width="10" Height="60" Fill="{StaticResource PhoneAccentBrush}" VerticalAlignment="Bottom" />
+            <TextBlock Margin="12,0,0,0"
+					   VerticalAlignment="Bottom"
+                       Text="{Binding Root}" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
+                       TextTrimming="WordEllipsis" TextWrapping="NoWrap"/>
+        </StackPanel>
+        <ListBox x:Name="ListBox"
+                    Grid.Row="1" HorizontalAlignment="Stretch" Margin="0,0,12,0"
+                    ItemsSource="{Binding Data}"  VirtualizingStackPanel.VirtualizationMode="Standard"
+                    SelectionChanged="ListBox_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <localControlEntities:FileDataTemplateSelector Content="{Binding}"
+                                                                    HorizontalAlignment="Left" HorizontalContentAlignment="Stretch">
+                        <localControlEntities:FileDataTemplateSelector.FolderTemplate>
+                            <DataTemplate>
+                                <Button Template="{StaticResource FolderButtonControlTemplate}"
+										localBehaviors:MetroInMotion.Tilt="3.5" slt:TiltEffect.IsTiltEnabled="True" Width="420">
+									<i:Interaction.Triggers>
+										<i:EventTrigger EventName="Click">
+											<cmd:EventToCommand Command="{Binding ElementName=FileBrowserControlName, Path=DataContext.SelectFolder}"
+																CommandParameter="{Binding}"/>
+										</i:EventTrigger>
+									</i:Interaction.Triggers>
+								</Button>
+                            </DataTemplate>
+                        </localControlEntities:FileDataTemplateSelector.FolderTemplate>
+                        <localControlEntities:FileDataTemplateSelector.VideoFileTemplate>
+                            <DataTemplate>
+                                <Button Template="{StaticResource VideoButtonControlTemplate}"
+										localBehaviors:MetroInMotion.Tilt="3.5" slt:TiltEffect.IsTiltEnabled="True" Width="420">
+									<i:Interaction.Triggers>
+										<i:EventTrigger EventName="Click">
+											<cmd:EventToCommand Command="{Binding ElementName=FileBrowserControlName, Path=DataContext.SelectVideo}"
+																CommandParameter="{Binding}"/>
+										</i:EventTrigger>
+									</i:Interaction.Triggers>
+								</Button>
+                            </DataTemplate>
+                        </localControlEntities:FileDataTemplateSelector.VideoFileTemplate>
+                        <localControlEntities:FileDataTemplateSelector.AudioFileTemplate>
+                            <DataTemplate>
+								<Button Template="{StaticResource AudioButtonControlTemplate}"
+										localBehaviors:MetroInMotion.Tilt="3.5" slt:TiltEffect.IsTiltEnabled="True" Width="420">
+									<i:Interaction.Triggers>
+										<i:EventTrigger EventName="Click">
+											<cmd:EventToCommand Command="{Binding ElementName=FileBrowserControlName, Path=DataContext.SelectAudio}"
+																CommandParameter="{Binding}"/>
+										</i:EventTrigger>
+									</i:Interaction.Triggers>
+								</Button>
+                            </DataTemplate>
+                        </localControlEntities:FileDataTemplateSelector.AudioFileTemplate>
+                    </localControlEntities:FileDataTemplateSelector>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBlock Grid.Row="1"
+                    VerticalAlignment="Top" HorizontalAlignment="Center"  TextAlignment="Center" Margin="12,50,12,0"
+                    Style="{StaticResource PhoneTextSubtleStyle}"
+                    Visibility="{Binding Path=EmptyFolder, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    TextWrapping="Wrap" FontSize="36" 
+                    Text="{Binding Source={StaticResource Localisation}, Path=NewDownload.EmptyFolderLabel, Mode=OneTime}"/>
+    </Grid>
+</UserControl>

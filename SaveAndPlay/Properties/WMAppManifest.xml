@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
+  <App xmlns="" BitsPerPixel="32" ProductID="{9893f41d-b9d7-423b-a924-317e3a1c8050}" Title="Save &amp; Play" RuntimeType="Silverlight" Version="1.3.0.0" Genre="apps.normal" Author="Romain Lécole" Description="Save online, Play offline" Publisher="SaveAndPlay">
+    <IconPath IsRelative="true" IsResource="false">Images\applicationIcon.png</IconPath>
+    <Capabilities>
+      <Capability Name="ID_CAP_IDENTITY_DEVICE" />
+      <Capability Name="ID_CAP_NETWORKING" />
+      <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
+      <Capability Name="ID_CAP_ISV_CAMERA" />
+      <Capability Name="ID_CAP_MEDIALIB" />
+    </Capabilities>
+    <Tasks>
+      <DefaultTask Name="_default" NavigationPage="MainPage.xaml" />
+      <ExtendedTask Name="BackgroundTask">
+        <BackgroundServiceAgent Specifier="AudioPlayerAgent" Name="SaveAndPlay.AudioPlaybackAgent" Source="SaveAndPlay.AudioPlaybackAgent" Type="SaveAndPlay.AudioPlaybackAgent.AudioPlayer" />
+      </ExtendedTask>
+    </Tasks>
+    <Tokens>
+      <PrimaryToken TokenID="SaveAndPlayToken" TaskName="_default">
+        <TemplateType5>
+          <BackgroundImageURI IsRelative="true" IsResource="false">Images\tileIcon.png</BackgroundImageURI>
+          <Count>0</Count>
+          <Title>Save &amp; Play</Title>
+        </TemplateType5>
+      </PrimaryToken>
+    </Tokens>
+  </App>
+</Deployment>

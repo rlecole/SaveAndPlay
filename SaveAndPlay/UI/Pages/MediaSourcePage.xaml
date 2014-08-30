@@ -1,0 +1,165 @@
+﻿<!-- Apache License, Version 2.0 
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+-->
+
+<localPages:BasePage
+    x:Name="MediaSourcesPage"
+    x:Class="SaveAndPlay.UI.Pages.MediaSourcePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP71"
+    xmlns:slt="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:localPages="clr-namespace:SaveAndPlay.UI.Pages"
+    xmlns:local="clr-namespace:SaveAndPlay.UI.Pages"
+    xmlns:localConverters="clr-namespace:SaveAndPlay.Converters"
+    xmlns:localBehaviors="clr-namespace:SaveAndPlay.UI.Behaviors"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True"
+    DataContext="{Binding Source={StaticResource Locator}, Path=NewDownload}">
+
+    <slt:TransitionService.NavigationInTransition>
+        <slt:NavigationInTransition>
+            <slt:NavigationInTransition.Backward>
+                <slt:SlideTransition Mode="SlideRightFadeIn"/>
+            </slt:NavigationInTransition.Backward>
+            <slt:NavigationInTransition.Forward>
+                <slt:TurnstileTransition Mode="ForwardIn"/>
+            </slt:NavigationInTransition.Forward>
+        </slt:NavigationInTransition>
+    </slt:TransitionService.NavigationInTransition>
+    <slt:TransitionService.NavigationOutTransition>
+        <slt:NavigationOutTransition>
+            <slt:NavigationOutTransition.Backward>
+                <slt:TurnstileTransition Mode="BackwardOut"/>
+            </slt:NavigationOutTransition.Backward>
+            <slt:NavigationOutTransition.Forward>
+                <slt:SlideTransition Mode="SlideLeftFadeOut"/>
+            </slt:NavigationOutTransition.Forward>
+        </slt:NavigationOutTransition>
+    </slt:TransitionService.NavigationOutTransition>
+    
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle"
+                       Text="{Binding Source={StaticResource Localisation}, Path=Main.ApplicationTitle, Mode=OneTime}"
+                       Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Margin="9,-7,0,0"
+                       Text="{Binding Source={StaticResource Localisation}, Path=MediaSource.Title, Mode=OneTime}"
+                       Style="{StaticResource PhoneTextTitle1Style}" FontSize="44"/>
+        </StackPanel>
+        
+        <Grid x:Name="ContentPanel" Margin="0,0,12,0"
+				Grid.Row="1"
+				ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <Grid.Resources>
+                <localConverters:MediaSourceLocalisationConverter x:Key="MedisSourceLocalitionConverter" />
+                <local:MediaSources x:Key="MediaSources">
+                    <local:Source Title="WebBrowser"
+                                    Description="WebBrowserDescription"
+                                    NavigateTo="/UI/Pages/URLSelectorWebBrowserPage.xaml" 
+                                    IconLight="/Images/light/ie.png"
+                                    IconDark="/Images/dark/ie.png"/>
+                    <local:Source Title="Skydrive"
+                                    Description="SkydriveDescription"
+                                    NavigateTo="/UI/Pages/URLSelectorSkydrivePage.xaml" 
+                                    IconLight="/Images/light/skydrive.png"
+                                    IconDark="/Images/dark/skydrive.png"/>
+                    <local:Source Title="Dropbox"
+                                    Description="DropboxDescription"
+                                    NavigateTo="/UI/Pages/URLSelectorDropboxPage.xaml" 
+                                    IconLight="/Images/light/dropbox.png"
+                                    IconDark="/Images/dark/dropbox.png"/>
+                    <local:Source Title="QRCode"
+                                    Description="QRCodeDescription"
+                                    NavigateTo="/UI/Pages/URLSelectorQRCodePage.xaml"
+                                    IconLight="/Images/light/camera.png"
+                                    IconDark="/Images/dark/camera.png"/>
+                    <local:Source Title="Keyboard"
+                                    Description="KeyboardDescription"
+                                    NavigateTo="/UI/Pages/URLSelectorManualPage.xaml"
+                                    IconLight="/Images/light/keyboard.png"
+                                    IconDark="/Images/dark/keyboard.png"/>
+                    <local:Source Title="AndMore"
+                                    Description="AndMoreDescription"
+                                    NavigateTo="/UI/Pages/AboutPage.xaml" 
+                                    IconLight="/Images/light/add.png"
+                                    IconDark="/Images/dark/add.png"/>
+                </local:MediaSources>
+            </Grid.Resources>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+            <ListBox x:Name="SourceListBox" ItemsSource="{StaticResource MediaSources}"  VirtualizingStackPanel.VirtualizationMode="Standard"
+                        SelectionChanged="Source_ListBox_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding Path=Navigate, ElementName=MediaSourcesPage}"
+                                CommandParameter="{Binding Path=NavigateTo}" Margin="0,0,0,0">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Grid Margin="0,0,0,12" localBehaviors:MetroInMotion.Tilt="3">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="72"></ColumnDefinition>
+                                            <ColumnDefinition Width="400"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="45"></RowDefinition>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Image x:Name="ContentContainer"
+                                                Grid.RowSpan="2" Grid.Column="0"
+                                                Width="64" Height="64" Margin="-12,0,0,0"
+                                                HorizontalAlignment="Right" VerticalAlignment="Top"
+                                                Source="{Binding IconLight}" Stretch="None"
+                                                localBehaviors:HandleThemeBehavior.DarkUrl="{Binding IconLight}"
+                                                localBehaviors:HandleThemeBehavior.LightUrl="{Binding IconDark}"/>
+                                        <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Top"
+                                                    Style="{StaticResource PhoneTextTitle2Style}" TextTrimming="WordEllipsis"
+                                                    Text="{Binding Path=Title, Converter={StaticResource MedisSourceLocalitionConverter}}">
+                                        </TextBlock>
+                                        <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"
+                                                    Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap"
+                                                    Text="{Binding Path=Description, Converter={StaticResource MedisSourceLocalitionConverter}}">
+                                        </TextBlock>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </Grid>
+
+</localPages:BasePage>

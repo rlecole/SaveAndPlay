@@ -1,0 +1,112 @@
+﻿<!-- Apache License, Version 2.0 
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+-->
+
+<localPages:BasePage
+    x:Class="SaveAndPlay.UI.Pages.AudioPlayerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:c4f="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    xmlns:localPages="clr-namespace:SaveAndPlay.UI.Pages"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True"
+    Style="{StaticResource TransitionPageTurnstileStyle}">
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,12">
+            <TextBlock x:Name="ApplicationTitle"
+                       Text="{Binding Source={StaticResource Localisation}, Path=Main.ApplicationTitle, Mode=OneTime}"
+                       Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle"
+                       Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="44"
+                       Text="{Binding Source={StaticResource Localisation}, Path=Main.AudioPlayerTitle, Mode=OneTime}"/>
+        </StackPanel>
+
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="400"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                <Grid VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="150"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel x:Name="TrackStackPanel" Orientation="Horizontal"
+							    VerticalAlignment="Center" Grid.Row="1" Margin="12,0">
+                    	<StackPanel.Projection>
+                    		<PlaneProjection/>
+                    	</StackPanel.Projection>
+                        <StackPanel.RenderTransform>
+                            <CompositeTransform/>
+                        </StackPanel.RenderTransform>
+                        <Rectangle Width="10" Height="120" Margin="0,0,12,0" Fill="{StaticResource PhoneAccentBrush}" />
+                        <StackPanel>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding Path=Track.Artist}" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="{StaticResource PhoneAccentBrush}" TextTrimming="WordEllipsis" />
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding Path=Track.Album}" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeMediumLarge}" TextTrimming="WordEllipsis"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding Path=Track.Title}" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeMedium}" TextTrimming="WordEllipsis"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="75"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <c4f:RoundButton HorizontalAlignment="Left" Margin="12,12" ImageSource="/Images/previous-player.png" Click="PreviousButton_Click"/>
+                        <c4f:RoundButton HorizontalAlignment="Left" Margin="12,12" ImageSource="/Images/play.png" Click="PlayButton_Click"/>
+                        <c4f:RoundButton HorizontalAlignment="Left" Margin="12,12" ImageSource="/Images/pause-player.png" Click="PauseButton_Click"/>
+                        <c4f:RoundButton HorizontalAlignment="Right" Margin="12,12" ImageSource="/Images/next-player.png" Click="NextButton_Click"/>
+                    </StackPanel>
+                    <Slider x:Name="ProgressSlider"
+                            Grid.Row="1" Margin="12,-28,12,0" Height="100" Foreground="{StaticResource PhoneAccentBrush}"
+						    Maximum="{Binding Maximum}" Value="{Binding CurrentPosition, Mode=TwoWay}"
+                            ManipulationCompleted="OnManipulationCompleted"
+                            ManipulationStarted="OnManipulationStarted"
+                            HorizontalAlignment="Center" Width="460"/>
+                    <TextBlock Grid.Row="2" HorizontalAlignment="Left" Margin="14,-56,8,0"
+        				       FontSize="{StaticResource PhoneFontSizeSmall}"
+						       Foreground="{StaticResource PhoneForegroundBrush}"
+                               Text="{Binding CurrentTime}"/>
+                    <TextBlock Grid.Row="2" HorizontalAlignment="Right" Margin="8,-56,14,0"
+        					   FontSize="{StaticResource PhoneFontSizeSmall}"
+							   Foreground="{StaticResource PhoneForegroundBrush}"
+                               Text="{Binding EndTime}"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</localPages:BasePage>

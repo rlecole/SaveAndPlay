@@ -1,0 +1,96 @@
+﻿<!-- Apache License, Version 2.0 
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+-->
+
+<localPages:BasePage 
+    x:Class="SaveAndPlay.UI.Pages.URLSelectorWebBrowserPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:slt="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:c4f="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+    xmlns:localPages="clr-namespace:SaveAndPlay.UI.Pages"
+    xmlns:localBehaviors="clr-namespace:SaveAndPlay.UI.Behaviors"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True"
+    BackKeyPress="PhoneApplicationPage_BackKeyPress"
+    Style="{StaticResource TransitionPageSlideStyle}"
+    DataContext="{Binding Source={StaticResource Locator}, Path=NewDownload}">
+
+    <localPages:BasePage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+			 <shell:ApplicationBar.Buttons>
+                <shell:ApplicationBarIconButton IconUri="/Images/previous.png" Text="AppBar_PreviousButton" Click="ApplicationBarIconButton_PreviousButton_Click"/>
+                <shell:ApplicationBarIconButton IconUri="/Images/refresh.png" Text="AppBar_RefreshButton" Click="ApplicationBarIconButton_RefreshButton_Click"/>
+            </shell:ApplicationBar.Buttons>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="AppBar_FavoritesMenu" Click="ApplicationBarMenuItem_Favorites_Click"/>
+                <shell:ApplicationBarMenuItem Text="AppBar_FavoriteAdditionMenu" Click="ApplicationBarMenuItem_AddFavorite_Click"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </localPages:BasePage.ApplicationBar>
+
+    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
+        <Grid.RowDefinitions>
+			<RowDefinition Height="75"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+		<Grid Grid.Row="0" slt:TiltEffect.IsTiltEnabled="True">
+			<slt:PhoneTextBox x:Name="URLTextBox"
+                              KeyDown="TextBox_KeyDown" Margin="-12,0"
+                              Hint="{Binding Source={StaticResource Localisation}, Path=NewDownload.AddressBarHint, Mode=OneTime}"
+                              ActionIcon="/Images/clear.png" ActionIconTapped="URLTextBox_ActionIconTapped" BorderThickness="0">
+                <TextBox.InputScope>
+                    <InputScope>
+                        <InputScopeName NameValue="Url"/>
+                    </InputScope>
+                </TextBox.InputScope>
+                <i:Interaction.Behaviors>
+                    <localBehaviors:PhoneTextBoxFocusBehavior/>
+                </i:Interaction.Behaviors>
+            </slt:PhoneTextBox>
+            <slt:PerformanceProgressBar x:Name="ProgressBar"
+                                        VerticalAlignment="Top"
+                                        Grid.Column="2" Margin="12,0,12,-7"/>
+        </Grid>
+
+        <c4f:ProgressOverlay Name="progressOverlay" Grid.RowSpan="3" Visibility="Collapsed" Canvas.ZIndex="99">
+            <c4f:ProgressOverlay.Content>
+                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                            Orientation="Vertical">
+                    <TextBlock HorizontalAlignment="Center" Margin="0,0,0,1"
+                               Style="{StaticResource PhoneTextAccentStyle}"
+                               Text="{Binding Source={StaticResource Localisation}, Path=NewDownload.URLValidation, Mode=OneTime}" />
+                    <slt:PerformanceProgressBar x:Name="progressBar"
+                                                HorizontalAlignment="Stretch"
+                                                IsIndeterminate="True"/>
+                </StackPanel>
+            </c4f:ProgressOverlay.Content>
+        </c4f:ProgressOverlay>
+    </Grid>
+
+</localPages:BasePage>

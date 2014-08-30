@@ -1,0 +1,31 @@
+﻿Save & Play est une application qui permet de sauvegarder des fichiers audios et vidéos sur son Windows Phone.
+Il est ainsi possible de les jouer ultérieurement sans avoir besoin d'être connecté à internet.
+
+Différents moyens sont à votre disposition pour télécharger ces fichiers videos/audios :
+- Naviguez sur internet et cliquez sur le media de votre choix
+- Connectez vous sur votre compte SkyDrive et sélectionnez le media de votre choix
+- Connectez vous sur votre compte Dropbox et sélectionnez le media de votre choix
+- Scannez un QRcode contenant un lien ciblant un media
+- Entrez manuellement un lien ciblant un media
+
+De plus, Save & Play propose les fonctionnalités suivantes :
+- Deux modes de transfert : lié à ou détaché de l'application
+- Les fichiers de votre choix peuvent être protégés par un mot de passe
+- Les fichiers peuvent être rénommés et/ou organisés
+- Les fichiers audio peuvent être joués en arrière plan
+
+v1.3.0.0 :
+- Tous les médias peuvent être renommés
+- Les médias audio peuvent être joués en arrière plan
+- Les médias audio peuvent être organisés par albums, artistes et par sélections
+- De nombreuses améliorations ergonomiques ont été apportées (nouvelle page principale, nouveaux lecteurs de médias avec curseurs, nouvel explorateur internet, nouvelles pages dédiées au mode protégé, suppression de tous les mouvements de balayage pour revenir en arrière et bien plus encore...)
+- Corrections de divers bugs mineurs et majeurs
+
+v1.2.0.0 :
+- 2 nouveaux modes de transfert : : lié à ou détaché de l'application
+- La source media SkyDrive est désormais capable de lire les dossiers de type "photos"
+- Des conseils pratiques sur le fonctionnement du mode protégé ont été ajoutés
+- Corrections de divers bugs mineurs et majeurs
+
+v1.1.1.0 :
+- Correction de bugs mineurs concernant la source media Dropbox

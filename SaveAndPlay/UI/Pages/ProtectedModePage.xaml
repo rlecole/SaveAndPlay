@@ -1,0 +1,138 @@
+﻿<!-- Apache License, Version 2.0 
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+-->
+
+<localPages:BasePage
+    x:Class="SaveAndPlay.UI.Pages.ProtectedModePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:localPages="clr-namespace:SaveAndPlay.UI.Pages"
+    xmlns:localConverters="clr-namespace:SaveAndPlay.Converters"
+    xmlns:localBehaviors="clr-namespace:SaveAndPlay.Behaviors"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:slt="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:c4f="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True"
+    DataContext="{Binding Source={StaticResource Locator}, Path=ProtectedMode}"
+    Style="{StaticResource TransitionPageTurnstileStyle}">
+
+    <localPages:BasePage.Resources>
+        <localConverters:ValueConverterGroup x:Key="InvertAndVisibilitateConverter">
+            <localConverters:InverseBooleanConverter/>
+            <localConverters:BooleanToVisibilityConverter/>
+        </localConverters:ValueConverterGroup>
+        <localConverters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </localPages:BasePage.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,12">
+            <TextBlock x:Name="ApplicationTitle"
+                       Text="{Binding Source={StaticResource Localisation}, Path=Main.ApplicationTitle, Mode=OneTime}"
+                       Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle"
+                       Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="44"
+                       Text="{Binding Source={StaticResource Localisation}, Path=ProtectedMode.Title, Mode=OneTime}"/>
+        </StackPanel>
+
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <StackPanel>
+                <TextBlock Text="{Binding Source={StaticResource Localisation}, Path=ProtectedMode.Enabled, Mode=OneTime}" HorizontalAlignment="Center"
+                           FontSize="{StaticResource PhoneFontSizeExtraExtraLarge}" FontFamily="{StaticResource PhoneFontFamilyLight}"
+                           Foreground="{StaticResource PhoneAccentBrush}"
+                           Visibility="{Binding Path=ProtectedMode,
+                                                Mode=OneWay,
+                                                Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <TextBlock Text="{Binding Source={StaticResource Localisation}, Path=ProtectedMode.Disabled, Mode=OneTime}" HorizontalAlignment="Center"
+                           FontSize="{StaticResource PhoneFontSizeExtraExtraLarge}" FontFamily="{StaticResource PhoneFontFamilyLight}"
+                           Foreground="{StaticResource PhoneAccentBrush}"
+                           Visibility="{Binding Path=ProtectedMode,
+                                                Mode=OneWay,
+                                                Converter={StaticResource InvertAndVisibilitateConverter}}"/>
+                <StackPanel>
+                    <TextBlock Grid.Row="1" Margin="12,0,0,12"
+                               TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Left"
+                               Visibility="{Binding Path=ProtectedMode,
+                                                    Mode=OneWay,
+                                                    Converter={StaticResource BooleanToVisibilityConverter}}"
+                               Text="{Binding Source={StaticResource Localisation}, Path=ProtectedMode.TurnOffProtectedModeLabel, Mode=OneTime}"/>
+                    <TextBlock Grid.Row="1" Margin="12,0,0,12"
+                               TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Left"
+                               Visibility="{Binding Path=ProtectedMode,
+                                                    Mode=OneWay,
+                                                    Converter={StaticResource InvertAndVisibilitateConverter}}"
+                               Text="{Binding Source={StaticResource Localisation}, Path=ProtectedMode.TurnOnProtectedModeLabel, Mode=OneTime}"/>
+                </StackPanel>
+                <StackPanel Margin="0,12,0,0"
+                            Visibility="{Binding Path=ProtectedMode,
+                                                 Mode=OneWay,
+                                                 Converter={StaticResource InvertAndVisibilitateConverter}}">
+                    <TextBlock Text="{Binding Source={StaticResource Localisation}, Path=ProtectedMode.UnlockLabel, Mode=OneTime}"
+                               Foreground="{StaticResource PhoneSubtleBrush}"
+                               FontSize="{StaticResource PhoneFontSizeNormal}"
+                               Margin="12 0 0 -8" TextWrapping="Wrap"/>
+                    <PasswordBox x:Name="ProtectedModePasswordBox"
+                                 MaxLength="8"
+                                 KeyUp="ProtectedModePasswordBox_KeyUp"/>
+                </StackPanel>
+                <StackPanel>
+                    <Button Content="{Binding Source={StaticResource Localisation}, Path=ProtectedMode.DisableButton, Mode=OneTime}"
+                            Visibility="{Binding Path=ProtectedMode,
+                                                 Mode=OneWay,
+                                                 Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Click="Disable_Button_Click" />
+                    <Button Content="{Binding Source={StaticResource Localisation}, Path=ProtectedMode.ChangePasswordButton, Mode=OneTime}"
+                            Click="ChangePassword_Button_Click" />
+                    <Button Content="{Binding Source={StaticResource Localisation}, Path=ProtectedMode.ForgotPasswordButton, Mode=OneTime}"
+                            Visibility="{Binding Path=ProtectedMode,
+                                                 Mode=OneWay,
+                                                 Converter={StaticResource InvertAndVisibilitateConverter}}"
+                            Click="ResetPassword_Button_Click" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <c4f:ProgressOverlay Name="progressOverlay" Grid.RowSpan="2" Visibility="Visible">
+            <c4f:ProgressOverlay.Content>
+                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                            Orientation="Vertical">
+                    <TextBlock x:Name="progressBarLabel"
+                               HorizontalAlignment="Center" Margin="0,0,0,1"
+                               Style="{StaticResource PhoneTextAccentStyle}"
+                               Text="{Binding Source={StaticResource Localisation}, Path=Main.Loading, Mode=OneTime}" />
+                    <slt:PerformanceProgressBar x:Name="progressBar"
+                                                HorizontalAlignment="Stretch"
+                                                IsIndeterminate="True"/>
+                </StackPanel>
+            </c4f:ProgressOverlay.Content>
+        </c4f:ProgressOverlay>
+    </Grid>
+</localPages:BasePage>

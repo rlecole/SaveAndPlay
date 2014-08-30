@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActiveAppMandatoryLabel" xml:space="preserve">
+    <value>L'application doit rester active, ne pas quitter, ne pas mettre le téléphone en veille.</value>
+  </data>
+  <data name="AddressBarHint" xml:space="preserve">
+    <value>Rechercher ou saisir une URL</value>
+  </data>
+  <data name="BackgroundTransferMode" xml:space="preserve">
+    <value>Détaché</value>
+  </data>
+  <data name="BackgroundTransferModeLabel" xml:space="preserve">
+    <value>Transfert détaché de Save &amp; Play, le téléchargement se poursuit même si Save &amp; Play n'est plus lancé.</value>
+  </data>
+  <data name="BrowseFolderFailedLabel" xml:space="preserve">
+    <value>Impossible d'accéder à ce dossier, la connexion a peut être été perdue</value>
+  </data>
+  <data name="Cellular3GMandatoryLabel" xml:space="preserve">
+    <value>Une connexion data 3G ou plus rapide est nécessaire</value>
+  </data>
+  <data name="Cellular3GMandatoryLabelLong" xml:space="preserve">
+    <value>Une connexion data 3G ou plus rapide est nécessaire</value>
+  </data>
+  <data name="ConnectionMandatoryLabel" xml:space="preserve">
+    <value>Une connexion data est nécessaire</value>
+  </data>
+  <data name="ConnectionMandatoryLabelLong" xml:space="preserve">
+    <value>Une connexion data est nécessaire</value>
+  </data>
+  <data name="ConnectionRequiredLabel" xml:space="preserve">
+    <value>Une connexion data est nécessaire</value>
+  </data>
+  <data name="DownloadMediaAlreadyExists" xml:space="preserve">
+    <value>Un fichier portant le même nom existe déjà. Voulez vous l'écraser?</value>
+  </data>
+  <data name="DownloadMediaAlreadyExistsProtected" xml:space="preserve">
+    <value>Un fichier protégé portant le même nom existe déjà</value>
+  </data>
+  <data name="DownloadRequirementsFailed" xml:space="preserve">
+    <value>Le téléchargement a échoué</value>
+  </data>
+  <data name="DownloadSameName" xml:space="preserve">
+    <value>Un fichier portant le même nom est déjà en cours de téléchargement</value>
+  </data>
+  <data name="DownloadValidation" xml:space="preserve">
+    <value>Préparation du téléchargement</value>
+  </data>
+  <data name="DownloadWarning" xml:space="preserve">
+    <value>Avertissement pour le téléchargement</value>
+  </data>
+  <data name="DropboxLoginFailed" xml:space="preserve">
+    <value>La connexion à votre compte Dropbox a échoué, veuillez vérifier votre connexion réseau.</value>
+  </data>
+  <data name="DropboxTitle" xml:space="preserve">
+    <value>Dropbox</value>
+  </data>
+  <data name="EmptyFolderLabel" xml:space="preserve">
+    <value>Ce dossier est vide ou ne contient pas de medias pris en charge par Save &amp; Play</value>
+  </data>
+  <data name="EnterInstructionsLabel" xml:space="preserve">
+    <value>Entrez un lien ci-dessus et validez</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Message d'erreur</value>
+  </data>
+  <data name="ExternalPowerMandatoryLabel" xml:space="preserve">
+    <value>Votre appareil doit être branché à un chargeur</value>
+  </data>
+  <data name="ExternalPowerMandatoryLabelLong" xml:space="preserve">
+    <value>Votre appareil doit être branché à un chargeur</value>
+  </data>
+  <data name="FavoriteAddition" xml:space="preserve">
+    <value>Ajouter favori</value>
+  </data>
+  <data name="FavoriteAdditionSuccess" xml:space="preserve">
+    <value>Votre favori a été enregistré avec succès</value>
+  </data>
+  <data name="FavoriteInvalidURL" xml:space="preserve">
+    <value>L'URL spécifée est invalide</value>
+  </data>
+  <data name="FavoriteNameRequired" xml:space="preserve">
+    <value>Un nom doit être spécifié pour enregistrer un favori</value>
+  </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>Favoris</value>
+  </data>
+  <data name="ForegroundTransferMode" xml:space="preserve">
+    <value>Lié</value>
+  </data>
+  <data name="ForegroundTransferModeLabel" xml:space="preserve">
+    <value>Transfert lié à Save &amp; Play, le téléchargement se poursuit tant que Save &amp; Play est lancé.</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Message d'information</value>
+  </data>
+  <data name="LoadingLabel" xml:space="preserve">
+    <value>Chargement</value>
+  </data>
+  <data name="ManualURLTitle" xml:space="preserve">
+    <value>Lien simple</value>
+  </data>
+  <data name="MaximumDownloadReached" xml:space="preserve">
+    <value>Le nombre maximum de transferts de fichiers en arrière plan a été atteint</value>
+  </data>
+  <data name="NewDownloadStarted" xml:space="preserve">
+    <value>Un nouveau téléchargement a commencé, vous pouvez le superviser à partir de la page dédiée aux téléchargements
+</value>
+  </data>
+  <data name="NotEnoughFreeSpace" xml:space="preserve">
+    <value>Il n'y plus assez d'espace disponible sur votre téléphone pour télécharger {0}</value>
+  </data>
+  <data name="NoTitleSpecified" xml:space="preserve">
+    <value>Veuillez entrez un titre</value>
+  </data>
+  <data name="QRCodeFailed" xml:space="preserve">
+    <value>Le QRCode n'a pas pu être déchiffré</value>
+  </data>
+  <data name="RootDirectoryLabel" xml:space="preserve">
+    <value>Racine</value>
+  </data>
+  <data name="ScanInstructionsLabel" xml:space="preserve">
+    <value>Scannez un QRCode pour obtenir un lien et validez</value>
+  </data>
+  <data name="SkydriveLoginFailed" xml:space="preserve">
+    <value>La connexion à votre compte SkyDrive a échoué, veuillez vérifier votre connexion réseau.</value>
+  </data>
+  <data name="SkydriveTitle" xml:space="preserve">
+    <value>SkyDrive</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Lancer téléchargement</value>
+  </data>
+  <data name="TitleLabel" xml:space="preserve">
+    <value>Veuillez entrer un nom pour le media</value>
+  </data>
+  <data name="TransferAdditionFailed" xml:space="preserve">
+    <value>Impossible de démarrer le téléchargement du fichier</value>
+  </data>
+  <data name="TransferModeLabel" xml:space="preserve">
+    <value>Déterminés à partir du mode de transfert choisi et de la taille estimée du media ({0})</value>
+  </data>
+  <data name="URLChoice" xml:space="preserve">
+    <value>Voulez-vous sauvegarder ce fichier?</value>
+  </data>
+  <data name="URLInvalid" xml:space="preserve">
+    <value>Le lien n'a pas pu être chargée</value>
+  </data>
+  <data name="URLKO" xml:space="preserve">
+    <value>Le lien est inaccessible ou ne cible pas un fichier video/audio pris en charge par Save &amp; Play</value>
+  </data>
+  <data name="URLLabel" xml:space="preserve">
+    <value>Lien</value>
+  </data>
+  <data name="URLSelectorQRCodeTitle" xml:space="preserve">
+    <value>QRCode</value>
+  </data>
+  <data name="URLValidation" xml:space="preserve">
+    <value>Vérifications en cours</value>
+  </data>
+  <data name="URLValidationInProgress" xml:space="preserve">
+    <value>Une validation est déjà en cours</value>
+  </data>
+  <data name="WifiMandatoryLabel" xml:space="preserve">
+    <value>Connexion Wi-Fi nécessaire</value>
+  </data>
+  <data name="WifiMandatoryLabelLong" xml:space="preserve">
+    <value>Une connexion Wi-Fi est nécessaire</value>
+  </data>
+  <data name="TransferRequirementsLabel" xml:space="preserve">
+    <value>Prérequis au transfert</value>
+  </data>
+</root>

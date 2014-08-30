@@ -1,0 +1,219 @@
+﻿<!-- Apache License, Version 2.0 
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+-->
+
+<localPages:BasePage  
+    x:Class="SaveAndPlay.UI.Pages.AddDownloadPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP71"
+    xmlns:slt="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:c4f="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+    xmlns:localConverters="clr-namespace:SaveAndPlay.Converters"
+    xmlns:localBehaviors="clr-namespace:SaveAndPlay.UI.Behaviors"
+    xmlns:localPages="clr-namespace:SaveAndPlay.UI.Pages"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True"
+    DataContext="{Binding Source={StaticResource Locator}, Path=NewDownload}">
+
+    <localPages:BasePage.Resources>
+        <localConverters:ValueConverterGroup x:Key="InvertAndVisibilitateConverter">
+            <localConverters:InverseBooleanConverter/>
+            <localConverters:BooleanToVisibilityConverter/>
+        </localConverters:ValueConverterGroup>
+        <localConverters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <localConverters:StringOrEmptyVisibilityConverter x:Key="StringOrEmptyVisibilityConverter" />
+        <localConverters:FileSizeConverter x:Key="FileSizeConverter" />
+        <localConverters:TransferRequirementLocalizationConverter x:Key="TransferRequirementLocalizationConverter" />
+        <localConverters:FileTransferFormatConverter x:Key="FileTransferFormatConverter" />
+    </localPages:BasePage.Resources>
+
+    <localPages:BasePage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Images/id3.png" Text="AppBar_AutoTitleButton" Click="AutoTitle_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/download.png" Text="AppBar_DownloadButton" Click="Download_Click"/>
+        </shell:ApplicationBar>
+    </localPages:BasePage.ApplicationBar>
+
+    <slt:TransitionService.NavigationInTransition>
+        <slt:NavigationInTransition>
+            <slt:NavigationInTransition.Backward>
+                <slt:TurnstileTransition Mode="BackwardIn"/>
+            </slt:NavigationInTransition.Backward>
+            <slt:NavigationInTransition.Forward>
+                <slt:SlideTransition Mode="SlideLeftFadeIn"/>
+            </slt:NavigationInTransition.Forward>
+        </slt:NavigationInTransition>
+    </slt:TransitionService.NavigationInTransition>
+    <slt:TransitionService.NavigationOutTransition>
+        <slt:NavigationOutTransition>
+            <slt:NavigationOutTransition.Backward>
+                <slt:SlideTransition Mode="SlideRightFadeOut"/>
+            </slt:NavigationOutTransition.Backward>
+            <slt:NavigationOutTransition.Forward>
+                <slt:TurnstileTransition Mode="ForwardOut"/>
+            </slt:NavigationOutTransition.Forward>
+        </slt:NavigationOutTransition>
+    </slt:TransitionService.NavigationOutTransition>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle"
+                       Text="{Binding Source={StaticResource Localisation}, Path=Main.ApplicationTitle, Mode=OneTime}"
+                       Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle"
+                       Text="{Binding Source={StaticResource Localisation}, Path=NewDownload.Title, Mode=OneTime}"
+                       Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="44"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
+            <Grid x:Name="ContentPanel" Margin="12,0,12,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Column="0" Grid.Row="0">
+                    <TextBlock Text="{Binding Source={StaticResource Localisation}, Path=NewDownload.TitleLabel, Mode=OneTime}"
+                               Foreground="{StaticResource PhoneSubtleBrush}"
+                               FontSize="21"
+                               VerticalAlignment="Center" HorizontalAlignment="Left"
+                               Margin="12 0 0 -8" TextWrapping="Wrap" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="TitleTextBox" Margin="0"
+                                 Text="{Binding Path=Title, Mode=TwoWay}"
+                                 KeyDown="TextBox_KeyDown"
+                                 GotFocus="TextBox_GotFocus"
+                                 LostFocus="TextBox_LostFocus"
+                                 TextWrapping="Wrap"
+                                 Height="75">
+                            <TextBox.InputScope>
+                                <InputScope>
+                                    <InputScopeName NameValue="FileName"/>
+                                </InputScope>
+                            </TextBox.InputScope>
+                        </TextBox>
+                    </Grid>
+                </StackPanel>
+                
+                <StackPanel Grid.Column="0" Grid.Row="1" Margin="12,0,12,12"
+                            Orientation="Vertical" VerticalAlignment="Center">
+                    <slt:ToggleSwitch x:Name="TransferModeSwitch"
+                                      Margin="-10,0,-10,-18"
+                                      Header="{Binding Source={StaticResource Localisation}, Path=NewDownload.TransferMode, Mode=OneTime}"
+                                      Content="{Binding Source={StaticResource Localisation}, Path=NewDownload.BackgroundTransferMode, Mode=OneTime}"
+                                      IsChecked="{Binding Path=TransferMode, Mode=TwoWay}"
+                                      Checked="TransferModeSwitch_Checked"
+                                      Unchecked="TransferModeSwitch_Unchecked" />
+                    <TextBlock Margin="0"
+                               Text="{Binding Source={StaticResource Localisation}, Path=NewDownload.BackgroundTransferModeLabel, Mode=OneTime}"
+                               TextWrapping="Wrap"
+                               TextAlignment="Left"
+                               Visibility="{Binding Path=TransferMode,
+                                                    Mode=OneWay,
+                                                    Converter={StaticResource InvertAndVisibilitateConverter}}"/>
+                    <TextBlock Margin="0"
+                               Text="{Binding Source={StaticResource Localisation}, Path=NewDownload.ForegroundTransferModeLabel, Mode=OneTime}"
+                               TextWrapping="Wrap"
+                               TextAlignment="Left"
+                               Visibility="{Binding Path=TransferMode,
+                                                    Mode=OneWay,
+                                                    Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+                    <TextBlock Text="{Binding Source={StaticResource Localisation}, Path=NewDownload.RequirementsLabel, Mode=OneTime}"
+                               Foreground="{StaticResource PhoneSubtleBrush}"
+                               FontSize="{StaticResource PhoneFontSizeNormal}"
+                               VerticalAlignment="Center" HorizontalAlignment="Left"
+                               Margin="0,30,0,-8" />
+
+					<TextBlock Text="{Binding Source={StaticResource Localisation}, Path=NewDownload.TransferRequirementsLabel, Mode=OneTime}"
+                               Foreground="{StaticResource PhoneSubtleBrush}"
+                               FontSize="21"
+                               VerticalAlignment="Center" HorizontalAlignment="Left"
+                               Margin="0,0,0,8" TextWrapping="Wrap" />
+
+					<TextBlock HorizontalAlignment="Left" Margin="0,0,0,0"
+                               Text="{Binding Path=ContentLength, Converter={StaticResource FileTransferFormatConverter}}"
+                               TextWrapping="Wrap"/>
+
+                    <ItemsControl ItemsSource="{Binding Requirements}" Margin="0,12,0,0">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="48"></ColumnDefinition>
+                                        <ColumnDefinition Width="400"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0"
+                                           Width="48" Height="48" Margin="-12,0,0,0"
+                                           HorizontalAlignment="Right" VerticalAlignment="Top"
+                                           Source="{Binding IconLight}" Stretch="None"
+                                           localBehaviors:HandleThemeBehavior.DarkUrl="{Binding IconLight}"
+                                           localBehaviors:HandleThemeBehavior.LightUrl="{Binding IconDark}"/>
+                                    <TextBlock Grid.Column="1"
+                                               Text="{Binding Path=Title, Converter={StaticResource TransferRequirementLocalizationConverter}}"
+                                               FontSize="24"
+                                               Margin="12,0,12,0" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+
+        <c4f:ProgressOverlay Name="progressOverlay" Grid.RowSpan="2" Visibility="Collapsed">
+            <c4f:ProgressOverlay.Content>
+                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                            Orientation="Vertical">
+                    <TextBlock x:Name="progressBarLabel"
+                               HorizontalAlignment="Center" Margin="0,0,0,1"
+                               Style="{StaticResource PhoneTextAccentStyle}"
+                               Text="{Binding Source={StaticResource Localisation}, Path=NewDownload.DownloadValidation, Mode=OneTime}" />
+                    <slt:PerformanceProgressBar x:Name="progressBar"
+                                                HorizontalAlignment="Stretch"
+                                                IsIndeterminate="True"/>
+                </StackPanel>
+            </c4f:ProgressOverlay.Content>
+        </c4f:ProgressOverlay>
+    </Grid>
+</localPages:BasePage>
