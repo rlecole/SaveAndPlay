@@ -16,3 +16,7 @@ Save & Play additionnal features :
 - Media files can be protected with a password
 - Media files can be renamed or/and organized
 - Audio files can be played in background
+
+Give it a try
+=============
+This application is currently deployed and available in the Windows Phone Store. (here is the US store page : http://www.windowsphone.com/en-us/store/app/save-play/143cb324-dd4e-4c65-8c90-caa4200391a8)
